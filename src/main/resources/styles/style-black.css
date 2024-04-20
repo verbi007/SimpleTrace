@@ -1,0 +1,152 @@
+/*:root {*/
+/*    --main-bg-color-lth: rgba(85, 92, 138, 0.28);*/
+/*    --main-bg-color-drk: rgba(62, 72, 133, 0.28);*/
+/*    --main-button-color: #F7CAD9;*/
+/*}*/
+.menu_title {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 24px;
+    -fx-text-fill: rgb(241, 156, 0);
+}
+
+.main_text {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+
+.text_field {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 12px;
+    -fx-background-color: rgb(209, 209, 209);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: innershadow(gaussian, rgba( 0, 0, 0, 0.5 ), 2, 0, 2, 2);
+}
+
+.text_field:hover {
+    -fx-background-color: rgb(241, 156, 0);
+    -fx-text-fill: #ffffff;
+}
+
+.link_field {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+link_field:hover {
+    -fx-background-color: rgb(241, 156, 0);
+}
+
+link_field:pressed {
+    -fx-background-color: rgba(255, 118, 0, 0.92);
+}
+
+.link {
+    -fx-underline: false;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.link:hover {
+    -fx-background-color: rgb(250, 89, 2);
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+.link_pressed {
+    -fx-background-color: rgb(241, 156, 0);
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+.link_disabled {
+    -fx-background-color: rgba(62, 72, 133, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+
+.result_text {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+}
+
+.menu_container {
+    -fx-background-color: rgb(159, 159, 159);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+}
+
+.main_container {
+    -fx-background-color: rgba(97, 97, 97, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.success_pane {
+    -fx-text-fill: rgba(80,200,120);
+    -fx-background-color: rgba(173, 235, 173);
+}
+
+
+.success_field {
+    -fx-background-color: rgba(173, 235, 173);
+}
+
+.error_pane {
+    -fx-background-color: rgb(250, 90, 90);
+}
+
+.button_text {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 12px;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-skin: inherit;
+
+}
+
+.button {
+    -fx-background-color: rgb(241, 156, 0);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-transition: -fx-background-color 0.5s;
+    -fx-effect: dropshadow(gaussian, rgba( 0, 0, 0, 0.1 ), 2, 0, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: rgb(250, 89, 2);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+
+    -fx-transition: -fx-background-color 0.5s ease,
+    -fx-scale-x 0.5s ease,
+    -fx-scale-y 0.5s ease;
+}
+
+.button:pressed {
+    -fx-background-color: rgba(80,200,120);
+    -fx-text-fill: rgb(255, 255, 255);
+
+}
+
+.select {
+
+}
+
+.select:even {
+    -fx-background-color: rgba(97, 97, 97, 0.28);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.text_curl {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 10px;
+    -fx-control-inner-background:#61616147;
+    -fx-focus-color: rgb(241, 156, 0);
+    -fx-faint-focus-color: transparent;
+    -fx-effect: innershadow(gaussian, rgba( 0, 0, 0, 0.1 ), 1, 0, 1, 1);
+}
+

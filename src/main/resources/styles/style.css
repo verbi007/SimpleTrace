@@ -1,0 +1,107 @@
+/*:root {*/
+/*    --main-bg-color-lth: rgba(85, 92, 138, 0.28);*/
+/*    --main-bg-color-drk: rgba(62, 72, 133, 0.28);*/
+/*    --main-button-color: #F7CAD9;*/
+/*}*/
+.menu_title {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 24px;
+    -fx-text-fill:  rgb(247, 202, 217);
+}
+
+.main_text {
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+
+.text_field {
+    -fx-background-color: rgba(85, 92, 138, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.text_field:hover {
+    -fx-background-color: rgb(247, 202, 217)
+}
+
+.link_field {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+link_field:hover {
+    -fx-background-color: rgb(247, 202, 217)
+}
+
+link_field:pressed {
+    -fx-background-color: rgb(247, 202, 217)
+}
+
+.link {
+    -fx-underline: false;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.link:hover {
+    -fx-background-color: rgb(247, 202, 217);
+    -fx-text-fill: rgb(248, 109, 155);
+}
+
+.link:pressed {
+    -fx-background-color: rgb(248, 109, 155);
+    -fx-text-fill: rgb(247, 202, 217);
+}
+
+.link_pressed {
+    -fx-background-color: rgb(248, 109, 155);
+    -fx-text-fill: rgb(247, 202, 217);
+}
+
+.link_disabled {
+    -fx-background-color: rgba(62, 72, 133, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+
+.result_text {
+    -fx-font-family: "Unispace";
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+}
+
+.menu_container {
+    -fx-background-color: rgba(62, 72, 133, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+}
+
+.main_container {
+    -fx-background-color:  rgba(85, 92, 138, 0.28);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+
+.button {
+    -fx-background-color: rgb(247, 202, 217);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-transition: -fx-background-color 0.5s;
+
+}
+
+.button:hover {
+    -fx-background-color: rgba(62, 72, 133, 0.28);
+    -fx-text-fill: rgb(247, 202, 217);
+}
+
+.button:pressed {
+    -fx-background-color: rgb(248, 109, 155);
+    -fx-text-fill: rgb(247, 202, 217);
+
+}
