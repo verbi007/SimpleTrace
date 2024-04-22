@@ -2,10 +2,12 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -31,50 +33,42 @@
             </Pane>
             <VBox layoutY="162.0" prefHeight="178.0" prefWidth="157.0">
                <children>
-                  <Pane prefHeight="30.0" prefWidth="107.0" styleClass="link_field">
-                     <children>
-                        <Hyperlink fx:id="blanksLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="30.0" prefWidth="107.0" scaleShape="false" text="Blanks" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font name="Roboto Medium" size="16.0" />
-                           </font>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                           <styleClass>
-                              <String fx:value="link" />
-                              <String fx:value="main_text" />
-                           </styleClass>
-                        </Hyperlink>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Hyperlink fx:id="blanksLink" cacheShape="false" centerShape="false" contentDisplay="CENTER" focusTraversable="false" prefHeight="30.0" prefWidth="107.0" scaleShape="false" text="Blanks" wrapText="true">
+                     <font>
+                        <Font name="Roboto Medium" size="16.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="link" />
+                        <String fx:value="main_text" />
+                     </styleClass>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                  </Pane>
-                  <Pane prefHeight="30.0" prefWidth="107.0" styleClass="link_field">
-                     <children>
-                        <Hyperlink fx:id="curlLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="25.0" prefWidth="107.0" scaleShape="false" text="CURL" textAlignment="CENTER" visited="true" wrapText="true">
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                           <font>
-                              <Font name="Roboto Medium" size="16.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="link" />
-                              <String fx:value="main_text" />
-                           </styleClass>
-                        </Hyperlink>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  </Hyperlink>
+                  <Hyperlink fx:id="curlLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="25.0" prefWidth="107.0" scaleShape="false" text="CURL" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Roboto Medium" size="16.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="link" />
+                        <String fx:value="main_text" />
+                     </styleClass>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                  </Pane>
+                  </Hyperlink>
+                  <Hyperlink fx:id="settingslLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="25.0" prefWidth="107.0" scaleShape="false" text="Settings" textAlignment="CENTER" visible="false" wrapText="true">
+                     <font>
+                        <Font name="Roboto Medium" size="16.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="link" />
+                        <String fx:value="main_text" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
@@ -94,6 +88,118 @@
          </children>
       </AnchorPane>
       <AnchorPane layoutX="158.0" layoutY="399.0" prefHeight="68.0" prefWidth="584.0" />
+      <Pane fx:id="settingsPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0" visible="false">
+         <children>
+            <VBox prefHeight="469.0" prefWidth="584.0">
+               <children>
+                  <Pane fx:id="settingsContainer" prefHeight="348.0" prefWidth="554.0" styleClass="menu_container">
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="346.0" prefWidth="554.0">
+                           <children>
+                              <HBox prefHeight="26.0" prefWidth="554.0">
+                                 <children>
+                                    <Label fx:id="curlLabel1" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Theme" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Roboto Medium" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <RadioButton depthTest="ENABLE" mnemonicParsing="false" prefHeight="21.0" prefWidth="68.0" styleClass="button_text" text="Black" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" styleClass="button_text" text="Light" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </RadioButton>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="554.0">
+                                 <children>
+                                    <Label fx:id="numberSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Number" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Roboto Medium" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="numberFieldSettings" prefHeight="24.0" prefWidth="400.0" styleClass="text_field">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="61.0" prefHeight="26.0" prefWidth="554.0">
+                                 <children>
+                                    <Label fx:id="tokenSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Token" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Roboto Medium" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tokenFieldSettings" prefHeight="24.0" prefWidth="400.0" styleClass="text_field">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="135.0" prefHeight="26.0" prefWidth="554.0" />
+                              <Accordion styleClass="text_field" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="79.0" prefWidth="554.0">
+                     <children>
+                        <Button fx:id="cancelButtonSettings" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" styleClass="button_text" text="Cancel" textAlignment="CENTER">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="saveButtonSettings" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" styleClass="button_text" text="Save" textAlignment="CENTER">
+                           <font>
+                              <Font name="Roboto" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
       <Pane fx:id="curlPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0" visible="false">
          <children>
             <VBox prefHeight="469.0" prefWidth="584.0">
@@ -130,7 +236,27 @@
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="traceIdFieldCurl" layoutX="42.0" layoutY="48.0" prefHeight="31.0" prefWidth="470.0" styleClass="text_field" />
+                        <TextField fx:id="traceIdFieldCurl" layoutX="42.0" layoutY="48.0" prefHeight="31.0" prefWidth="381.0" styleClass="text_field" />
+                        <HBox layoutX="334.0" layoutY="49.0" prefHeight="31.0" prefWidth="193.0">
+                           <children>
+                              <Button fx:id="copyButtonCurl" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" styleClass="button_text" text="Copy" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Roboto" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="openButtonCurl" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" styleClass="button_text" text="Open" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Roboto" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -155,14 +281,6 @@
                            </HBox.margin>
                         </Button>
                         <Button fx:id="applyButtonCurl" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" styleClass="button_text" text="Apply" textAlignment="CENTER">
-                           <font>
-                              <Font name="Roboto" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="20.0" right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="copyButtonCurl" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" styleClass="button_text" text="Copy" textAlignment="CENTER">
                            <font>
                               <Font name="Roboto" size="14.0" />
                            </font>
@@ -222,14 +340,34 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="traceIdPaneBlanks" prefHeight="101.0" prefWidth="577.0" styleClass="menu_container">
+                  <Pane prefHeight="101.0" prefWidth="525.0" styleClass="menu_container">
                      <children>
-                        <Label fx:id="traceIDLabelBlanks" layoutX="235.0" layoutY="14.0" styleClass="main_text" text="Trace ID" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                        <Label fx:id="traceIDLabel11" layoutX="235.0" layoutY="14.0" styleClass="main_text" text="Trace ID" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="traceIdFieldBlanks" editable="false" layoutX="42.0" layoutY="48.0" prefHeight="31.0" prefWidth="470.0" styleClass="text_field" />
+                        <TextField fx:id="traceIdFieldBlanks" layoutX="42.0" layoutY="48.0" prefHeight="31.0" prefWidth="381.0" styleClass="text_field" />
+                        <HBox layoutX="334.0" layoutY="49.0" prefHeight="31.0" prefWidth="193.0">
+                           <children>
+                              <Button fx:id="copyButtonBlanks" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" styleClass="button_text" text="Copy" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Roboto" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="openButtonBlanks" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" styleClass="button_text" text="Open" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Roboto" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -254,14 +392,6 @@
                            </HBox.margin>
                         </Button>
                         <Button fx:id="applyButtonBlanks" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" styleClass="button_text" text="Apply" textAlignment="CENTER">
-                           <font>
-                              <Font name="Roboto" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="20.0" right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="copyButtonBlanks" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" styleClass="button_text" text="Copy" textAlignment="CENTER">
                            <font>
                               <Font name="Roboto" size="14.0" />
                            </font>

@@ -4,9 +4,8 @@ import com.microsoft.playwright.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -27,6 +26,7 @@ import java.util.List;
 
 
 public class BaseController {
+
 
     @FXML
     private ComboBox<String> apiTypeCombobox;
@@ -72,6 +72,12 @@ public class BaseController {
 
     @FXML
     private ComboBox<String> envTypeComboBox;
+
+    @FXML
+    private Button openButtonBlanks;
+
+    @FXML
+    private Button openButtonCurl;
 
     @FXML
     private Label resultLabelBlanks;
@@ -330,6 +336,38 @@ public class BaseController {
 //            copyButtonCurl.setDisable(true);
         });
 
+        //OpenButtonBlanks
+        openButtonBlanks.setOnAction(event -> {
+            String trace = "";
+            if (traceIdFieldBlanks.getText() != "" || !traceIdFieldBlanks.getText().isEmpty()) {
+                trace = traceIdFieldBlanks.getText();
+                Playwright playwright = Playwright.create();
+                Browser browser = playwright
+                        .chromium()
+                        .launch(new BrowserType.LaunchOptions()
+                                .setHeadless(false));
+                Page page = browser.newPage();
+
+                page.navigate(Constants.JAEGER_URL + trace);
+            }
+        });
+
+        //OpenButtonCurl
+        openButtonCurl.setOnAction(event -> {
+            String trace = "";
+            if (traceIdFieldCurl.getText() != null || !traceIdFieldCurl.getText().isEmpty()) {
+                trace = traceIdFieldCurl.getText();
+                Playwright playwright = Playwright.create();
+                Browser browser = playwright
+                        .chromium()
+                        .launch(new BrowserType.LaunchOptions()
+                                .setHeadless(false));
+                Page page = browser.newPage();
+
+                page.navigate(Constants.JAEGER_URL + trace);
+            }
+        });
+
 
     }
 
@@ -340,7 +378,7 @@ public class BaseController {
 
     public void removeAlerts(Label result, Pane resultPane) {
         result.setStyle("-fx-text-fill: rgb(255, 255, 255);");
-        resultPane.setStyle("-fx-background-color: rgb(159, 159, 159);");
+        resultPane.setStyle("-fx-background-color: rgb(44, 44, 44);");
         result.setText("");
     }
 
@@ -374,7 +412,7 @@ public class BaseController {
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
-                    .setHeadless(true));
+                    .setHeadless(false));
             Page page = browser.newPage();
 
 
@@ -401,5 +439,6 @@ public class BaseController {
             getErrorAlert(resultLabel, resultPane);
         }
     }
+
 
 }

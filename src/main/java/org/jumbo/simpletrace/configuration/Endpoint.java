@@ -22,6 +22,11 @@ public class Endpoint {
     }
 
     public Endpoint() {
+        this.apiMethod = ApiMethod.GET;
+        this.url = "";
+        this.params = new HashMap<>();
+        this.headers = new HashMap<>();
+        this.data = "";
     }
 
     public ApiMethod getApiMethod() {
