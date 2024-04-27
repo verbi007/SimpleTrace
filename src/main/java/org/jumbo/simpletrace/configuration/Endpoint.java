@@ -56,12 +56,23 @@ public class Endpoint {
         return this;
     }
 
+    public Endpoint setParams(String header, String value) {
+        this.params.put(header, value);
+        return this;
+    }
+
+
     public HashMap<String, String> getHeaders() {
         return headers;
     }
 
     public Endpoint setHeaders(HashMap<String, String> headers) {
         this.headers = headers;
+        return this;
+    }
+
+    public Endpoint setHeaders(String header, String value) {
+        this.headers.put(header, value);
         return this;
     }
 

@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
@@ -18,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="740.0" styleClass="main_container" stylesheets="@../../../styles/style-black.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jumbo.simpletrace.BaseController">
+<AnchorPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="740.0" styleClass="main_container" stylesheets="@../../../styles/style-black.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jumbo.simpletrace.BaseController">
    <children>
       <AnchorPane prefHeight="469.0" prefWidth="150.0" styleClass="menu_container">
          <children>
@@ -57,7 +56,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Hyperlink fx:id="settingslLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="25.0" prefWidth="107.0" scaleShape="false" text="Settings" textAlignment="CENTER" visible="false" wrapText="true">
+                  <Hyperlink fx:id="settingslLink" cacheShape="false" centerShape="false" focusTraversable="false" prefHeight="25.0" prefWidth="107.0" scaleShape="false" text="Settings" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Roboto Medium" size="16.0" />
                      </font>
@@ -88,7 +87,7 @@
          </children>
       </AnchorPane>
       <AnchorPane layoutX="158.0" layoutY="399.0" prefHeight="68.0" prefWidth="584.0" />
-      <Pane fx:id="settingsPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0" visible="false">
+      <Pane fx:id="settingsPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0">
          <children>
             <VBox prefHeight="469.0" prefWidth="584.0">
                <children>
@@ -101,7 +100,7 @@
                            <children>
                               <HBox prefHeight="26.0" prefWidth="554.0">
                                  <children>
-                                    <Label fx:id="curlLabel1" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Theme" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                    <Label fx:id="themeLabel" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Theme" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                                        <font>
                                           <Font name="Roboto Medium" size="14.0" />
                                        </font>
@@ -109,12 +108,12 @@
                                           <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <RadioButton depthTest="ENABLE" mnemonicParsing="false" prefHeight="21.0" prefWidth="68.0" styleClass="button_text" text="Black" textFill="WHITE">
+                                    <RadioButton fx:id="radioButtonDark" depthTest="ENABLE" mnemonicParsing="false" prefHeight="21.0" prefWidth="68.0" selected="true" styleClass="button_text" text="Dark" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </HBox.margin>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" styleClass="button_text" text="Light" textFill="WHITE">
+                                    <RadioButton fx:id="radioButtonLight" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" styleClass="button_text" text="Light" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </HBox.margin>
@@ -132,7 +131,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="554.0">
                                  <children>
-                                    <Label fx:id="numberSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Number" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                    <Label fx:id="numberLabelSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Number" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                                        <font>
                                           <Font name="Roboto Medium" size="14.0" />
                                        </font>
@@ -149,7 +148,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="61.0" prefHeight="26.0" prefWidth="554.0">
                                  <children>
-                                    <Label fx:id="tokenSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Token" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                    <Label fx:id="tokenLabelSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Token" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                                        <font>
                                           <Font name="Roboto Medium" size="14.0" />
                                        </font>
@@ -164,8 +163,23 @@
                                     </TextField>
                                  </children>
                               </HBox>
-                              <HBox layoutX="10.0" layoutY="135.0" prefHeight="26.0" prefWidth="554.0" />
-                              <Accordion styleClass="text_field" />
+                              <HBox layoutX="10.0" layoutY="135.0" prefHeight="26.0" prefWidth="554.0">
+                                 <children>
+                                    <Label fx:id="repeatLabelSettings" prefHeight="21.0" prefWidth="90.0" styleClass="main_text" text="Repeats" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Roboto Medium" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="repeatsFieldSettings" prefHeight="24.0" prefWidth="55.0" styleClass="text_field">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -300,7 +314,7 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="blanksPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0">
+      <Pane fx:id="blanksPane" layoutX="157.0" prefHeight="469.0" prefWidth="584.0" visible="false">
          <children>
             <VBox prefHeight="469.0" prefWidth="584.0">
                <children>

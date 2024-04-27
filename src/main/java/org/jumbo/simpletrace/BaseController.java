@@ -1,6 +1,8 @@
 package org.jumbo.simpletrace;
 
 import com.microsoft.playwright.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.jumbo.simpletrace.configuration.RestPlaywright;
 import org.jumbo.simpletrace.configuration.api.ApiCatalog4;
@@ -27,6 +30,8 @@ import java.util.List;
 
 public class BaseController {
 
+    @FXML
+    private AnchorPane mainContainer;
 
     @FXML
     private ComboBox<String> apiTypeCombobox;
@@ -42,6 +47,9 @@ public class BaseController {
 
     @FXML
     private Pane blanksPane;
+
+    @FXML
+    private Button cancelButtonSettings;
 
     @FXML
     private Button clearButtonBlanks;
@@ -74,10 +82,22 @@ public class BaseController {
     private ComboBox<String> envTypeComboBox;
 
     @FXML
+    private TextField numberFieldSettings;
+
+    @FXML
+    private Label numberLabelSettings;
+
+    @FXML
     private Button openButtonBlanks;
 
     @FXML
     private Button openButtonCurl;
+
+    @FXML
+    private RadioButton radioButtonDark;
+
+    @FXML
+    private RadioButton radioButtonLight;
 
     @FXML
     private Label resultLabelBlanks;
@@ -98,16 +118,37 @@ public class BaseController {
     private Button retryButtonCurl;
 
     @FXML
+    private Button saveButtonSettings;
+
+    @FXML
+    private Pane settingsContainer;
+
+    @FXML
+    private Pane settingsPane;
+
+    @FXML
     private Pane settingsPane1;
 
     @FXML
     private Pane settingsPane2;
 
     @FXML
+    private Hyperlink settingslLink;
+
+    @FXML
+    private Label themeLabel;
+
+    @FXML
+    private TextField tokenFieldSettings;
+
+    @FXML
+    private Label tokenLabelSettings;
+
+    @FXML
     private Label traceIDLabel1;
 
     @FXML
-    private Label traceIDLabelBlanks;
+    private Label traceIDLabel11;
 
     @FXML
     private TextField traceIdFieldBlanks;
@@ -116,7 +157,7 @@ public class BaseController {
     private TextField traceIdFieldCurl;
 
     @FXML
-    private Pane traceIdPaneBlanks;
+    private TextField repeatsFieldSettings;
 
 
     protected ApiCatalog4 apiCatalog4;
@@ -125,42 +166,85 @@ public class BaseController {
     protected String urlEndpoint = "";
     protected String traceId;
     protected String apiTypeTitle;
+    protected String number;
+    protected String token;
+    protected int repeats;
 
 
     protected List<String> traceIdList;
 
     @FXML
     void initialize() {
-        apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST);
+//        apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, number, token);
+        repeats = Constants.REPEATS;
         apiTypeTitle = Constants.FALSETEASER_TITLE;
         envType = EnvType.TEST;
 
         blanksLink.setDisable(true);
         blanksLink.getStyleClass().add("link_pressed");
 
+        //Number
+        if (numberFieldSettings.getText() != null || !numberFieldSettings.getText().isEmpty()) {
+            number = numberFieldSettings.getText();
+        } else {
+            number = Constants.NUMBER;
+        }
+
+        //Token
+        if (tokenFieldSettings.getText() != null || !tokenFieldSettings.getText().isEmpty()) {
+            token = tokenFieldSettings.getText();
+        } else {
+            token = Constants.TOKEN;
+        }
+
 
         //Blanks
         blanksLink.setOnAction(event -> {
             blanksPane.setVisible(true);
             blanksLink.getStyleClass().add("link_pressed");
+
+            settingslLink.getStyleClass().remove("link_pressed");
             curlLink.getStyleClass().remove("link_pressed");
 
             blanksLink.setDisable(true);
             curlLink.setDisable(false);
+            settingslLink.setDisable(false);
 
             curlPane.setVisible(false);
+            settingsPane.setVisible(false);
 
         });
         //CURL
         curlLink.setOnAction(event -> {
             curlPane.setVisible(true);
             curlLink.getStyleClass().add("link_pressed");
+
+            settingslLink.getStyleClass().remove("link_pressed");
             blanksLink.getStyleClass().remove("link_pressed");
 
 
             curlLink.setDisable(true);
             blanksLink.setDisable(false);
+            settingslLink.setDisable(false);
 
+            blanksPane.setVisible(false);
+            settingsPane.setVisible(false);
+        });
+
+        //Settings
+        settingslLink.setOnAction(event -> {
+            settingsPane.setVisible(true);
+            settingslLink.getStyleClass().add("link_pressed");
+
+            curlLink.getStyleClass().remove("link_pressed");
+            blanksLink.getStyleClass().remove("link_pressed");
+
+
+            settingslLink.setDisable(true);
+            curlLink.setDisable(false);
+            blanksLink.setDisable(false);
+
+            curlPane.setVisible(false);
             blanksPane.setVisible(false);
         });
 
@@ -176,7 +260,9 @@ public class BaseController {
             envType = EnvType.valueOf(envTypeComboBox.getValue());
             apiCatalog4 = ApiFactory.getApiCatalog4(
                     ApiType.valueOf(apiTypeTitle),
-                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD
+                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD,
+                    number,
+                    token
             );
 //            if (!traceIdFieldBlanks.getText().isEmpty()) {
 //                retryButtonBlanks.setDisable(true);
@@ -204,7 +290,9 @@ public class BaseController {
             ApiType apiType = ApiType.valueOf(apiTypeTitle);
             apiCatalog4 = ApiFactory.getApiCatalog4(
                     apiType,
-                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD
+                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD,
+                    number,
+                    token
             );
 
 //            if (!traceIdFieldBlanks.getText().isEmpty()) {
@@ -218,6 +306,7 @@ public class BaseController {
 
         //Actions 'ApplyButtonBlanks'
         applyButtonBlanks.setOnAction(event -> {
+            apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, number, token);
             traceIdList = new ArrayList<>();
             urlEndpoint = apiCatalog4.getEndpoint().getUrl();
 
@@ -225,7 +314,7 @@ public class BaseController {
                 traceIdFieldBlanks.setText("");
 
                 // Rest request
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < repeats; i++) {
                     traceIdList.add(RestPlaywright.getTraceId(apiCatalog4.getEndpoint()));
                 }
 
@@ -246,7 +335,7 @@ public class BaseController {
                 traceIdList = new ArrayList<>();
 
                 // Rest request
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < repeats; i++) {
                     traceIdList.add(RestPlaywright.getTraceId(apiCatalog4.getEndpoint()));
                 }
 
@@ -368,6 +457,50 @@ public class BaseController {
             }
         });
 
+        //SaveButtonSettings
+        saveButtonSettings.setOnAction(event -> {
+            if (!numberFieldSettings.getText().isEmpty()) {
+                number = numberFieldSettings.getText();
+                token = tokenFieldSettings.getText();
+            }
+            if (!repeatsFieldSettings.getText().isEmpty()) {
+                try {
+                    repeats = Integer.parseInt(repeatsFieldSettings.getText());
+                } catch (NumberFormatException e) {
+                    e.getMessage();
+                }
+            }
+
+        });
+
+        radioButtonDark = new RadioButton();
+        radioButtonLight = new RadioButton();
+
+        ToggleGroup themeToggleGroup = new ToggleGroup();
+        radioButtonDark.setToggleGroup(themeToggleGroup);
+        radioButtonLight.setToggleGroup(themeToggleGroup);
+
+
+//        radioButtonLight.setOnAction(event -> {
+//            mainContainer.getStylesheets().add("style-light.css");
+//            mainContainer.getStylesheets().remove("style-black.css");
+//        });
+//
+//        radioButtonDark.setOnAction(event -> {
+//            mainContainer.getStylesheets().add("style-black.css");
+//            mainContainer.getStylesheets().remove("style-light.css");
+//        });
+
+        themeToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+
+            public void changed(ObservableValue<? extends Toggle> changed, Toggle oldValue, Toggle newValue){
+
+                // получаем выбранный элемент RadioButton
+                saveButtonSettings = (Button) newValue;
+                if (saveButtonSettings.getText().equals("Light")) mainContainer.getStylesheets().remove("style-light.css");
+            }
+        });
+
 
     }
 
@@ -412,14 +545,14 @@ public class BaseController {
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false));
+                    .setHeadless(true));
             Page page = browser.newPage();
 
 
             for (int i = 0; i < traceIdList.size(); i++) {
                 page.navigate(Constants.JAEGER_URL + traceIdList.get(i));
                 try {
-                    page.waitForSelector(".ErrorMessage--msg ", new Page.WaitForSelectorOptions().setTimeout(500)).isVisible();
+                    page.waitForSelector(".ErrorMessage--msg ", new Page.WaitForSelectorOptions().setTimeout(900)).isVisible();
                 } catch (TimeoutError e) {
                     traceId = traceIdList.get(i);
 

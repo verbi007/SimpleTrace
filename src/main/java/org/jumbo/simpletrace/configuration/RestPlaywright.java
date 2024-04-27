@@ -54,7 +54,8 @@ public class RestPlaywright {
             }
         }
         if (response != null) {
-            traceId = response.headers().get(Constants.X_TRACE_ID.toLowerCase());
+            traceId = response.headers().get(Constants.UBER_TRACE_ID.toLowerCase());
+            traceId = traceId.split(":")[0];
             if (traceId != null) {
                 return traceId;
             }

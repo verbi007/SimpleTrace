@@ -16,6 +16,7 @@ public interface Constants {
     String BFF_GET_SCREEN_WIDGETS = "/bff/get_screen_widgets";
     String FALSETEASER_TITLE = "FALSETEASER";
     String X_TRACE_ID = "X-Trace-Id";
+    String UBER_TRACE_ID = "Uber-Trace-Id";
     String NUMBER = "O298058" ;
     String NUMBER_NASTYA = "A535246";
     String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjYXJkIjoiTzI5ODA1OCIsInZlcnNpb24iOjJ9.0i9zceaM3ff43Kd0sbQ4B1OdhH1wSTe4kEmXPImiOtFYiemyeYVQmkrfn2daIx7j7jt312TlnVAQzu9sdJuAK_NhXkbwWIqWW7caV9ZqdKjEe2uJoGDNOUZ81wy_EtaRDEn11w56sF53SfUmn7yzvqaB4kT6tARPQqn4I0Fu5wc";
@@ -39,5 +40,6 @@ public interface Constants {
     String ERROR_COLOR_TEXT = "-fx-text-fill: rgba(255,50,50);";
     String RESULT_BLANKS_TEXT = "Select the env and endpoint and click Apply";
     String RESULT_CURL_TEXT = "Enter curl and click Apply";
+    Integer REPEATS = 20;
 
 }
