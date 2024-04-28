@@ -20,6 +20,7 @@ public class Product extends ApiCatalog4 {
     public Endpoint getEndpoint(EnvType envType, String number, String token, String productId) {
         endpoint = new Endpoint();
         endpoint.setApiMethod(ApiMethod.GET);
+        endpoint.setEnvType(envType);
 
         if (!number.isEmpty()) {
             endpoint.setHeaders("x-vkusvill-token", token);

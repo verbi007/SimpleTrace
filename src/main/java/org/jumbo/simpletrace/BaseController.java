@@ -162,6 +162,11 @@ public class BaseController {
     @FXML
     private ToggleGroup themeToggleGroup;
 
+    @FXML
+    private Button clearNumberSettings;
+
+    @FXML
+    private Button clearTokenSettings;
 
     protected ApiCatalog4 apiCatalog4;
     protected EnvType envType;
@@ -253,6 +258,10 @@ public class BaseController {
 
             curlPane.setVisible(false);
             blanksPane.setVisible(false);
+
+            numberFieldSettings.setText(configFile.getNumber());
+            tokenFieldSettings.setText(configFile.getToken());
+            repeatsFieldSettings.setText(String.valueOf(repeats));
         });
 
 
@@ -312,7 +321,7 @@ public class BaseController {
 
                 // Rest request
                 for (int i = 0; i < repeats; i++) {
-                    traceIdList.add(RestPlaywright.getTraceId(apiCatalog4.getEndpoint()));
+                    traceIdList.add(RestPlaywright.getTraceId(apiCatalog4));
                 }
 
                 //Check url
@@ -333,7 +342,7 @@ public class BaseController {
 
                 // Rest request
                 for (int i = 0; i < repeats; i++) {
-                    traceIdList.add(RestPlaywright.getTraceId(apiCatalog4.getEndpoint()));
+                    traceIdList.add(RestPlaywright.getTraceId(apiCatalog4));
                 }
 
                 //Check url
@@ -467,6 +476,38 @@ public class BaseController {
 
         });
 
+        //numberFieldSettings copy
+        numberFieldSettings.setOnMouseClicked(event -> {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = toolkit.getSystemClipboard();
+            clipboard.setContents(
+                    new StringSelection(numberFieldSettings.getText()),
+                    null
+            );
+        });
+
+        //tokenFieldSettings copy
+        tokenFieldSettings.setOnMouseClicked(event -> {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = toolkit.getSystemClipboard();
+            clipboard.setContents(
+                    new StringSelection(tokenFieldSettings.getText()),
+                    null
+            );
+        });
+
+
+        //ClearNumberButtonSettings
+        clearNumberSettings.setOnAction(event -> {
+            numberFieldSettings.setText("");
+        });
+
+        //ClearTokenButtonSettings
+        clearTokenSettings.setOnAction(event -> {
+            tokenFieldSettings.setText("");
+        });
+
+
         themeToggleGroup = new ToggleGroup();
 
         themeToggleGroup.getToggles().addAll(radioButtonDark,radioButtonLight);
@@ -483,6 +524,10 @@ public class BaseController {
             radioButtonLight.setSelected(true);
             lightIsInstalled();
         }
+
+
+
+
 
     }
 

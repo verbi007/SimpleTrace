@@ -1,12 +1,16 @@
 package org.jumbo.simpletrace.configuration.api;
 
 import org.jumbo.simpletrace.configuration.Endpoint;
+import org.jumbo.simpletrace.constants.Constants;
 
 import java.util.HashMap;
 
 public abstract class ApiCatalog4 {
     protected String data;
     protected Endpoint endpoint;
+
+    public ApiCatalog4() {
+    }
 
     public String getData() {
         return data;

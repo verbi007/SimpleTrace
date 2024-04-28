@@ -6,6 +6,8 @@ import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
 
+import org.jumbo.simpletrace.configuration.api.ApiCatalog4;
+import org.jumbo.simpletrace.configuration.api.EnvType;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
 import org.jumbo.simpletrace.constants.Constants;
 
@@ -38,8 +40,9 @@ public class RestPlaywright {
         }
     }
 
-    public static String request(Endpoint endpoint, RequestOptions options) {
+    public static String request(ApiCatalog4 apiCatalog4, RequestOptions options) {
         String traceId = "";
+        Endpoint endpoint = apiCatalog4.getEndpoint();
         switch (endpoint.getApiMethod()){
             case ApiMethod.GET -> {
                 endpoint.getParams().forEach(options::setQueryParam);
@@ -54,7 +57,11 @@ public class RestPlaywright {
             }
         }
         if (response != null) {
-            traceId = response.headers().get(Constants.UBER_TRACE_ID.toLowerCase());
+            if (endpoint.getEnvType() == EnvType.TEST) {
+                traceId = response.headers().get(Constants.UBER_TRACE_ID.toLowerCase());
+            } else {
+                traceId = response.headers().get(Constants.X_TRACE_ID.toLowerCase());
+            }
             traceId = traceId.split(":")[0];
             if (traceId != null) {
                 return traceId;
@@ -65,13 +72,13 @@ public class RestPlaywright {
     }
 
 
-    public static String getTraceId(Endpoint endpoint) {
+    public static String getTraceId(ApiCatalog4 apiCatalog4) {
         createPlaywright();
         createAPIRequestContext();
 
         RequestOptions options = RequestOptions.create();
 
-        String traceId = request(endpoint, options);
+        String traceId = request(apiCatalog4, options);
 
         disposeAPIRequestContext();
         closePlaywright();

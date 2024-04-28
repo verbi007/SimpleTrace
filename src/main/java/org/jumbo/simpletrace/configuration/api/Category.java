@@ -14,6 +14,7 @@ public class Category extends ApiCatalog4 {
     public Endpoint getEndpoint(EnvType envType, String number, String token, String categoryId, String allProducts, String limit) {
         endpoint = new Endpoint();
         endpoint.setApiMethod(ApiMethod.GET);
+        endpoint.setEnvType(envType);
 
         if (!number.isEmpty()) {
             endpoint.setParams("number", number);

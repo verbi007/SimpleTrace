@@ -14,6 +14,7 @@ public class BFFGetScreenWidgets extends ApiCatalog4 {
     public Endpoint getEndpoint(EnvType envType, String number, String token, String screen, String allProducts, String offline) {
         endpoint = new Endpoint();
         endpoint.setApiMethod(ApiMethod.GET);
+        endpoint.setEnvType(envType);
 
         if (!number.isEmpty()) {
             endpoint.setHeaders("x-vkusvill-token", token);
