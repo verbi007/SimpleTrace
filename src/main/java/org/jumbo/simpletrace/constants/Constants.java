@@ -41,5 +41,7 @@ public interface Constants {
     String RESULT_BLANKS_TEXT = "Select the env and endpoint and click Apply";
     String RESULT_CURL_TEXT = "Enter curl and click Apply";
     Integer REPEATS = 20;
+    String DARK = "Dark";
+    String LIGHT = "Light";
 
 }

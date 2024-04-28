@@ -1,10 +1,9 @@
 package org.jumbo.simpletrace;
 
 import com.microsoft.playwright.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -13,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import org.jumbo.simpletrace.configFile.ConfigFile;
 import org.jumbo.simpletrace.configuration.RestPlaywright;
 import org.jumbo.simpletrace.configuration.api.ApiCatalog4;
 import org.jumbo.simpletrace.configuration.api.ApiFactory;
@@ -159,6 +159,9 @@ public class BaseController {
     @FXML
     private TextField repeatsFieldSettings;
 
+    @FXML
+    private ToggleGroup themeToggleGroup;
+
 
     protected ApiCatalog4 apiCatalog4;
     protected EnvType envType;
@@ -169,14 +172,18 @@ public class BaseController {
     protected String number;
     protected String token;
     protected int repeats;
+    protected ConfigFile configFile;
 
 
     protected List<String> traceIdList;
 
     @FXML
     void initialize() {
-//        apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, number, token);
-        repeats = Constants.REPEATS;
+        configFile = new ConfigFile();
+        configFile.readApplicationSet();
+
+        repeats = Integer.parseInt(configFile.getRepeats());
+        apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, configFile.getNumber(), configFile.getToken());
         apiTypeTitle = Constants.FALSETEASER_TITLE;
         envType = EnvType.TEST;
 
@@ -264,10 +271,6 @@ public class BaseController {
                     number,
                     token
             );
-//            if (!traceIdFieldBlanks.getText().isEmpty()) {
-//                retryButtonBlanks.setDisable(true);
-//                copyButtonBlanks.setDisable(false);
-//            }
             removeAlerts(resultLabelBlanks, resultPaneBlanks);
             resultLabelBlanks.setText(Constants.RESULT_BLANKS_TEXT);
         });
@@ -294,11 +297,6 @@ public class BaseController {
                     number,
                     token
             );
-
-//            if (!traceIdFieldBlanks.getText().isEmpty()) {
-//                retryButtonBlanks.setDisable(true);
-//                copyButtonBlanks.setDisable(false);
-//            }
             removeAlerts(resultLabelBlanks, resultPaneBlanks);
             resultLabelBlanks.setText(Constants.RESULT_BLANKS_TEXT);
         });
@@ -306,7 +304,6 @@ public class BaseController {
 
         //Actions 'ApplyButtonBlanks'
         applyButtonBlanks.setOnAction(event -> {
-            apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, number, token);
             traceIdList = new ArrayList<>();
             urlEndpoint = apiCatalog4.getEndpoint().getUrl();
 
@@ -361,10 +358,6 @@ public class BaseController {
 
             //Check url
             checkingTheTrace(traceIdFieldBlanks, resultLabelBlanks, resultPaneBlanks);
-//            if (!traceIdFieldBlanks.getText().isEmpty()) {
-//                copyButtonBlanks.setDisable(false);
-//                clearButtonBlanks.setDisable(false);
-//            }
 
         });
 
@@ -375,8 +368,6 @@ public class BaseController {
 
             //Check url
             checkingTheTrace(traceIdFieldCurl, resultLabelCurl, resultPaneCurl);
-//            if (!traceIdFieldCurl.getText().isEmpty()) copyButtonCurl.setDisable(true);
-
         });
 
 
@@ -409,8 +400,6 @@ public class BaseController {
 
             retryButtonBlanks.setDisable(true);
             clearButtonBlanks.setDisable(true);
-//            copyButtonBlanks.setDisable(true);
-
         });
 
         //ClearButtonCurl
@@ -422,7 +411,6 @@ public class BaseController {
 
             retryButtonCurl.setDisable(true);
             clearButtonCurl.setDisable(true);
-//            copyButtonCurl.setDisable(true);
         });
 
         //OpenButtonBlanks
@@ -462,46 +450,64 @@ public class BaseController {
             if (!numberFieldSettings.getText().isEmpty()) {
                 number = numberFieldSettings.getText();
                 token = tokenFieldSettings.getText();
+                configFile
+                        .setNumber(number)
+                        .setToken(token);
             }
             if (!repeatsFieldSettings.getText().isEmpty()) {
                 try {
                     repeats = Integer.parseInt(repeatsFieldSettings.getText());
+                    configFile.setRepeats(String.valueOf(repeats));
                 } catch (NumberFormatException e) {
                     e.getMessage();
                 }
             }
 
+            configFile.writeApplicationSet();
+
         });
 
-        radioButtonDark = new RadioButton();
-        radioButtonLight = new RadioButton();
+        themeToggleGroup = new ToggleGroup();
 
-        ToggleGroup themeToggleGroup = new ToggleGroup();
-        radioButtonDark.setToggleGroup(themeToggleGroup);
-        radioButtonLight.setToggleGroup(themeToggleGroup);
+        themeToggleGroup.getToggles().addAll(radioButtonDark,radioButtonLight);
 
+        //Сhecking the configFile for the theme field
+        if (configFile.getTheme().equals("Dark")) {
+            themeToggleGroup.selectToggle(radioButtonDark);
+            radioButtonLight.setSelected(false);
+            radioButtonDark.setSelected(true);
+            darkIsInstalled();
+        } else {
+            themeToggleGroup.selectToggle(radioButtonLight);
+            radioButtonDark.setSelected(false);
+            radioButtonLight.setSelected(true);
+            lightIsInstalled();
+        }
 
-//        radioButtonLight.setOnAction(event -> {
-//            mainContainer.getStylesheets().add("style-light.css");
-//            mainContainer.getStylesheets().remove("style-black.css");
-//        });
-//
-//        radioButtonDark.setOnAction(event -> {
-//            mainContainer.getStylesheets().add("style-black.css");
-//            mainContainer.getStylesheets().remove("style-light.css");
-//        });
+    }
 
-        themeToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+    //RadioButtonLight
+    @FXML
+    public void choiceLight(ActionEvent event) {
+        lightIsInstalled();
+        configFile.setTheme(Constants.LIGHT);
+    }
 
-            public void changed(ObservableValue<? extends Toggle> changed, Toggle oldValue, Toggle newValue){
+    //RadioButtonDark
+    @FXML
+    public void choiceDark(ActionEvent event) {
+        darkIsInstalled();
+        configFile.setTheme(Constants.DARK);
+    }
 
-                // получаем выбранный элемент RadioButton
-                saveButtonSettings = (Button) newValue;
-                if (saveButtonSettings.getText().equals("Light")) mainContainer.getStylesheets().remove("style-light.css");
-            }
-        });
+    public void lightIsInstalled() {
+        mainContainer.getStylesheets().remove(0);
+        mainContainer.getStylesheets().add(getClass().getResource("/styles/style-grey.css").toString());
+    }
 
-
+    public void darkIsInstalled() {
+        mainContainer.getStylesheets().remove(0);
+        mainContainer.getStylesheets().add(getClass().getResource("/styles/style-black.css").toString());
     }
 
     public void setDisabledRetryButtons() {
