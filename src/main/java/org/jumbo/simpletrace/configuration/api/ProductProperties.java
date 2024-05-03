@@ -4,8 +4,6 @@ import org.jumbo.simpletrace.configuration.Endpoint;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
 import org.jumbo.simpletrace.constants.Constants;
 
-import java.util.HashMap;
-
 public class ProductProperties extends ApiCatalog4 {
     public ProductProperties(EnvType envType, String number) {
         endpoint = getEndpoint(envType, number, Constants.PRODUCT_STR_ID);
@@ -24,7 +22,7 @@ public class ProductProperties extends ApiCatalog4 {
         if (!number.isEmpty()) {
             endpoint.setParams("number", number);
         } else {
-            endpoint.setParams("number", Constants.NUMBER);
+            endpoint.setParams("number", Constants.NUMBER_4);
         }
 
         endpoint.setParams("product_id_str", productPropertiesId);

@@ -178,6 +178,8 @@ public class BaseController {
     protected String token;
     protected int repeats;
     protected ConfigFile configFile;
+    private int width;
+    private int height;
 
 
     protected List<String> traceIdList;
@@ -185,9 +187,9 @@ public class BaseController {
     @FXML
     void initialize() {
         configFile = new ConfigFile();
-        configFile.readApplicationSet();
-
         repeats = Integer.parseInt(configFile.getRepeats());
+
+
         apiCatalog4 = ApiFactory.getApiCatalog4(ApiType.FALSETEASER, EnvType.TEST, configFile.getNumber(), configFile.getToken());
         apiTypeTitle = Constants.FALSETEASER_TITLE;
         envType = EnvType.TEST;
@@ -199,14 +201,14 @@ public class BaseController {
         if (numberFieldSettings.getText() != null || !numberFieldSettings.getText().isEmpty()) {
             number = numberFieldSettings.getText();
         } else {
-            number = Constants.NUMBER;
+            number = Constants.NUMBER_4;
         }
 
         //Token
         if (tokenFieldSettings.getText() != null || !tokenFieldSettings.getText().isEmpty()) {
             token = tokenFieldSettings.getText();
         } else {
-            token = Constants.TOKEN;
+            token = Constants.TOKEN_4;
         }
 
 
@@ -261,7 +263,7 @@ public class BaseController {
 
             numberFieldSettings.setText(configFile.getNumber());
             tokenFieldSettings.setText(configFile.getToken());
-            repeatsFieldSettings.setText(String.valueOf(repeats));
+            repeatsFieldSettings.setText(String.valueOf(configFile.getRepeats()));
         });
 
 
@@ -334,6 +336,7 @@ public class BaseController {
         //Actions 'ApplyButtonCurl'
         applyButtonCurl.setOnAction(event -> {
             try {
+                String text = curlField.getText();
                 apiCatalog4.setEndpoint(CurlToClass.getCurlEndpoint(curlField.getText()));
                 traceIdFieldCurl.setText("");
                 removeAlerts(resultLabelCurl, resultPaneCurl);
@@ -433,6 +436,8 @@ public class BaseController {
                         .launch(new BrowserType.LaunchOptions()
                                 .setHeadless(false));
                 Page page = browser.newPage();
+                getScreenSize();
+                page.setViewportSize(width, height);
 
                 page.navigate(Constants.JAEGER_URL + trace);
             }
@@ -449,9 +454,12 @@ public class BaseController {
                         .launch(new BrowserType.LaunchOptions()
                                 .setHeadless(false));
                 Page page = browser.newPage();
+                getScreenSize();
+                page.setViewportSize(width, height);
 
                 page.navigate(Constants.JAEGER_URL + trace);
             }
+
         });
 
         //SaveButtonSettings
@@ -473,7 +481,7 @@ public class BaseController {
             }
 
             configFile.writeApplicationSet();
-
+            saveButtonSettings.setTooltip(new Tooltip("Save settings"));
         });
 
         //numberFieldSettings copy
@@ -513,6 +521,48 @@ public class BaseController {
         themeToggleGroup.getToggles().addAll(radioButtonDark,radioButtonLight);
 
         //Сhecking the configFile for the theme field
+        checkTheme();
+
+        cancelButtonSettings.setOnAction(event -> {
+            configFile.defaultConfiguration();
+            configFile.writeApplicationSet();
+
+            darkIsInstalled();
+            checkTheme();
+            numberFieldSettings.setText(configFile.getNumber());
+            tokenFieldSettings.setText(configFile.getToken());
+            repeatsFieldSettings.setText(configFile.getRepeats());
+        });
+
+        hints();
+
+    }
+
+    private void hints() {
+        apiTypeCombobox.setTooltip(new Tooltip("Select an endpoint"));
+        envTypeComboBox.setTooltip(new Tooltip("Select an environment"));
+        applyButtonBlanks.setTooltip(new Tooltip("Starting the Trace Id search"));
+        applyButtonCurl.setTooltip(new Tooltip("Starting the Trace Id search"));
+        retryButtonBlanks.setTooltip(new Tooltip("Restarting the search"));
+        retryButtonCurl.setTooltip(new Tooltip("Restarting the search"));
+        copyButtonBlanks.setTooltip(new Tooltip("Copy the Trace Id"));
+        copyButtonCurl.setTooltip(new Tooltip("Copy the Trace Id"));
+        clearButtonBlanks.setTooltip(new Tooltip("Clean the fields"));
+        clearButtonCurl.setTooltip(new Tooltip("Clean the fields"));
+        openButtonBlanks.setTooltip(new Tooltip("Open in a browser"));
+        openButtonCurl.setTooltip(new Tooltip("Open in a browser"));
+        cancelButtonSettings.setTooltip(new Tooltip("Return the default settings"));
+        saveButtonSettings.setTooltip(new Tooltip("Save settings"));
+        numberFieldSettings.setTooltip(new Tooltip("Сlick to save"));
+        tokenFieldSettings.setTooltip(new Tooltip("Сlick to save"));
+        clearNumberSettings.setTooltip(new Tooltip("Clean the fields"));
+        clearTokenSettings.setTooltip(new Tooltip("Clean the fields"));
+        repeatsFieldSettings.setTooltip(new Tooltip("Number of repeated requests"));
+    }
+
+
+
+    private void checkTheme() {
         if (configFile.getTheme().equals("Dark")) {
             themeToggleGroup.selectToggle(radioButtonDark);
             radioButtonLight.setSelected(false);
@@ -524,11 +574,6 @@ public class BaseController {
             radioButtonLight.setSelected(true);
             lightIsInstalled();
         }
-
-
-
-
-
     }
 
     //RadioButtonLight
@@ -592,11 +637,13 @@ public class BaseController {
     private void checkingTheTrace(TextField traceIdField,Label resultLabel, Pane resultPane) {
         if (traceIdList != null || !traceIdList.isEmpty()) {
 
+
+
             Playwright playwright = Playwright.create();
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
-                    .setHeadless(true));
+                    .setHeadless(false));
             Page page = browser.newPage();
 
 
@@ -624,5 +671,9 @@ public class BaseController {
         }
     }
 
-
+    private void getScreenSize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = (int) screenSize.getWidth();
+        height = (int) screenSize.getHeight();
+    }
 }

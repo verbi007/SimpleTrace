@@ -1,6 +1,6 @@
 package org.jumbo.simpletrace;
 
-import static javafx.application.Application.launch;
+import java.net.URL;
 
 public class Start {
     public static void main(String[] args) {

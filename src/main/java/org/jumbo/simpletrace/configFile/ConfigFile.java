@@ -1,13 +1,14 @@
 package org.jumbo.simpletrace.configFile;
 
+import org.jumbo.simpletrace.BaseController;
 import org.jumbo.simpletrace.constants.Constants;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+
+import java.util.Properties;
 
 public class ConfigFile {
+    Properties mainProperties;
     private File file;
     private String path;
     private String theme;
@@ -16,8 +17,9 @@ public class ConfigFile {
     private String repeats;
 
     public ConfigFile() {
-        this.path = "src/main/resources/config.txt";
-        this.file = new File(this.path);
+        this.path = "./config.properties";
+        mainProperties = new Properties();
+        this.file = new File(path);
         readApplicationSet();
     }
 
@@ -78,10 +80,10 @@ public class ConfigFile {
     public void writeApplicationSet() {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
-            byte[] themeBuffer = (theme + "\n").getBytes();
-            byte[] numberBuffer = (number + "\n").getBytes();
-            byte[] tokenBuffer = (token + "\n").getBytes();
-            byte[] repeatsBuffer = (repeats).getBytes();
+            byte[] themeBuffer = ("theme=" + theme + "\n").getBytes();
+            byte[] numberBuffer = ("number=" +number + "\n").getBytes();
+            byte[] tokenBuffer = ("token=" + token + "\n").getBytes();
+            byte[] repeatsBuffer = ("repeats=" + repeats).getBytes();
 
 
             outputStream.write(themeBuffer);
@@ -96,32 +98,35 @@ public class ConfigFile {
     }
 
     public void readApplicationSet() {
-        String data = "";
         try {
             FileInputStream inputStream = new FileInputStream(file);
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                data = new String(buffer, 0, bytesRead);
-            }
+            mainProperties.load(inputStream);
             inputStream.close();
-            String[] dt = data.split("\n");
-            theme = dt[0].trim();
-            number = dt[1].trim();
-            token = dt[2].trim();
-            repeats = dt[3].trim();
+
+            theme = mainProperties.getProperty("theme");
+            number = mainProperties.getProperty("number");
+            token = mainProperties.getProperty("token");
+            repeats = mainProperties.getProperty("repeats");
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void defaultConfiguration() {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
-            byte[] themeBuffer = (Constants.DARK + "\n").getBytes();
-            byte[] numberBuffer = (Constants.NUMBER + "\n").getBytes();
-            byte[] tokenBuffer = (Constants.TOKEN + "\n").getBytes();
-            byte[] repeatsBuffer = (Constants.REPEATS + "\n").getBytes();
+            theme = Constants.DARK;
+            number = Constants.NUMBER_4;
+            token = Constants.TOKEN_4;
+            repeats = Constants.REPEATS.toString();
+
+
+            byte[] themeBuffer = ("theme=" + theme + "\n").getBytes();
+            byte[] numberBuffer = ("number=" +number + "\n").getBytes();
+            byte[] tokenBuffer = ("token=" + token + "\n").getBytes();
+            byte[] repeatsBuffer = ("repeats=" + repeats).getBytes();
 
             outputStream.write(themeBuffer);
             outputStream.write(numberBuffer);
@@ -133,4 +138,5 @@ public class ConfigFile {
             throw new RuntimeException(e);
         }
     }
+
 }

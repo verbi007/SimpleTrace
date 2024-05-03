@@ -4,8 +4,6 @@ import org.jumbo.simpletrace.configuration.Endpoint;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
 import org.jumbo.simpletrace.constants.Constants;
 
-import java.util.HashMap;
-
 public class ShoppingList extends ApiCatalog4 {
     public ShoppingList(EnvType env, String number, String token ) {
         endpoint = getEndpoint(env, number, token, Constants.SHOPPING_LIST_ID, Constants.SHOP_ID);
@@ -20,8 +18,8 @@ public class ShoppingList extends ApiCatalog4 {
             endpoint.setHeaders("x-vkusvill-token", token);
             endpoint.setParams("number", number);
         } else {
-            endpoint.setHeaders("x-vkusvill-token", Constants.TOKEN_NASTYA);
-            endpoint.setParams("number", Constants.NUMBER_NASTYA);
+            endpoint.setHeaders("x-vkusvill-token", Constants.TOKEN_5);
+            endpoint.setParams("number", Constants.NUMBER_5);
         }
 
         endpoint.setParams("list_id", listId);
