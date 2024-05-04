@@ -57,7 +57,7 @@ public class RestPlaywright {
             }
         }
         if (response != null) {
-            if (endpoint.getEnvType() == EnvType.TEST) {
+            if (endpoint.getEnvType() == EnvType.TEST && !endpoint.getUrl().contains("/bff/")) {
                 traceId = response.headers().get(Constants.UBER_TRACE_ID.toLowerCase());
             } else {
                 traceId = response.headers().get(Constants.X_TRACE_ID.toLowerCase());

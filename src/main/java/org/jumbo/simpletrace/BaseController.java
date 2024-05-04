@@ -336,7 +336,6 @@ public class BaseController {
         //Actions 'ApplyButtonCurl'
         applyButtonCurl.setOnAction(event -> {
             try {
-                String text = curlField.getText();
                 apiCatalog4.setEndpoint(CurlToClass.getCurlEndpoint(curlField.getText()));
                 traceIdFieldCurl.setText("");
                 removeAlerts(resultLabelCurl, resultPaneCurl);
@@ -636,9 +635,6 @@ public class BaseController {
 
     private void checkingTheTrace(TextField traceIdField,Label resultLabel, Pane resultPane) {
         if (traceIdList != null || !traceIdList.isEmpty()) {
-
-
-
             Playwright playwright = Playwright.create();
             Browser browser = playwright
                     .chromium()
@@ -646,9 +642,9 @@ public class BaseController {
                     .setHeadless(false));
             Page page = browser.newPage();
 
-
             for (int i = 0; i < traceIdList.size(); i++) {
                 page.navigate(Constants.JAEGER_URL + traceIdList.get(i));
+
                 try {
                     page.waitForSelector(".ErrorMessage--msg ", new Page.WaitForSelectorOptions().setTimeout(900)).isVisible();
                 } catch (TimeoutError e) {
