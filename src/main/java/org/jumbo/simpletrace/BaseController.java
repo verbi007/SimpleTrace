@@ -639,7 +639,7 @@ public class BaseController {
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false));
+                    .setHeadless(true));
             Page page = browser.newPage();
 
             for (int i = 0; i < traceIdList.size(); i++) {

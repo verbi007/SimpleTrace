@@ -29,9 +29,9 @@
                         <Font name="Unispace-Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="118.0" fitWidth="117.0" layoutX="20.0" layoutY="8.0">
+                  <ImageView fitHeight="127.0" fitWidth="128.0" layoutX="15.0" layoutY="14.0">
                      <image>
-                        <Image url="@../../../../../../../../../Downloads/logo200x200.png" />
+                        <Image url="@../../../img/logo200x200.png" />
                      </image>
                   </ImageView>
                </children>
