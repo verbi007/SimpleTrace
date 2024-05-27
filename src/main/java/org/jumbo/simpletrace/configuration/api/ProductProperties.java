@@ -19,6 +19,8 @@ public class ProductProperties extends ApiCatalog4 {
         endpoint.setApiMethod(ApiMethod.GET);
         endpoint.setEnvType(envType);
 
+        endpoint.setHeaders("x-integration-token", Constants.TOKEN_INT);
+
         if (!number.isEmpty()) {
             endpoint.setParams("number", number);
         } else {
