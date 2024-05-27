@@ -3,6 +3,7 @@ package org.jumbo.simpletrace.constants;
 public interface Constants {
     String BASE_TEST_URL = "https://test.vkusvill.ru/api/catalog4";
     String BASE_PROD_URL = "https://mobile.vkusvill.ru/api/catalog4";
+    String BASE_PREPROD_URL = "http://10.1.240.80:8081/api/catalog4";
     String BASE_TEST_URL_NOCATALOG = "https://test.vkusvill.ru/api";
     String BASE_PROD_URL_NOCATALOG = "https://mobile.vkusvill.ru/api";
     String JAEGER_URL = "http://10.0.15.35:16686/trace/";

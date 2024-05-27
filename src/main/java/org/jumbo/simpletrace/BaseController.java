@@ -1,6 +1,7 @@
 package org.jumbo.simpletrace;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.junit.Options;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -170,6 +171,7 @@ public class BaseController {
 
     protected ApiCatalog4 apiCatalog4;
     protected EnvType envType;
+    private Playwright playwright;
 
     protected String urlEndpoint = "";
     protected String traceId;
@@ -328,6 +330,7 @@ public class BaseController {
 
                 //Check url
                 checkingTheTrace(traceIdFieldBlanks, resultLabelBlanks, resultPaneBlanks);
+                playwright.close();
                 retryButtonBlanks.setDisable(false);
                 if (!traceIdFieldBlanks.getText().isEmpty()) clearButtonBlanks.setDisable(false);
             }
@@ -635,7 +638,7 @@ public class BaseController {
 
     private void checkingTheTrace(TextField traceIdField,Label resultLabel, Pane resultPane) {
         if (traceIdList != null || !traceIdList.isEmpty()) {
-            Playwright playwright = Playwright.create();
+            playwright = Playwright.create();
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
@@ -643,7 +646,12 @@ public class BaseController {
             Page page = browser.newPage();
 
             for (int i = 0; i < traceIdList.size(); i++) {
-                page.navigate(Constants.JAEGER_URL + traceIdList.get(i));
+                try {
+                    page.navigate(Constants.JAEGER_URL + traceIdList.get(i));
+                } catch (PlaywrightException pe) {
+                    resultLabel.setText("Try to turn on the vpn");
+                    playwright.close();
+                }
 
                 try {
                     page.waitForSelector(".ErrorMessage--msg ", new Page.WaitForSelectorOptions().setTimeout(900)).isVisible();
@@ -662,9 +670,11 @@ public class BaseController {
                 }
             }
             page.close();
+            playwright.close();
         } else {
             getErrorAlert(resultLabel, resultPane);
         }
+
     }
 
     private void getScreenSize() {
