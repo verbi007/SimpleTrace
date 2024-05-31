@@ -30,7 +30,7 @@ public class ProductProperties extends ApiCatalog4 {
         endpoint.setParams("product_id_str", productPropertiesId);
         endpoint.setParams("source", "10");
 
-        String url = envType == EnvType.TEST ? Constants.BASE_TEST_URL : Constants.BASE_PROD_URL;
+        String url = envType.getUrl();
         url += Constants.PRODUCT_PROPERTIES;
         endpoint.setUrl(url);
 

@@ -29,7 +29,8 @@ public class Falseteaser extends ApiCatalog4 {
 
         endpoint.setParams("falseteaser_id", falseteaserId);
 
-        String url = envType == EnvType.TEST ? Constants.BASE_TEST_URL : Constants.BASE_PROD_URL;
+//        String url = envType == EnvType.TEST ? Constants.BASE_TEST_URL : Constants.BASE_PROD_URL;
+        String url = envType.getUrl();
         url += Constants.FALSHTEASER;
         endpoint.setUrl(url);
 

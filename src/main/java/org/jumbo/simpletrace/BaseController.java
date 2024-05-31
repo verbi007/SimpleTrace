@@ -272,15 +272,17 @@ public class BaseController {
         //EnvType
         ObservableList<String> envList = FXCollections.observableArrayList(
                 EnvType.TEST.toString(),
-                EnvType.PROD.toString()
+                EnvType.PROD.toString(),
+                EnvType.PREPROD.toString()
         );
         envTypeComboBox.setItems(envList);
 
         envTypeComboBox.setOnAction(even -> {
             envType = EnvType.valueOf(envTypeComboBox.getValue());
+
             apiCatalog4 = ApiFactory.getApiCatalog4(
                     ApiType.valueOf(apiTypeTitle),
-                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD,
+                    envType,
                     number,
                     token
             );
@@ -294,6 +296,8 @@ public class BaseController {
                 ApiType.CATEGORIES.toString(),
                 ApiType.SET.toString(),
                 ApiType.PRODUCT.toString(),
+                ApiType.TEASERS.toString(),
+                ApiType.SEARCH.toString(),
                 ApiType.PRODUCT_PROPERTIES.toString(),
                 ApiType.SHOPPING_LIST.toString(),
                 ApiType.TREE_AVAILABLE.toString(),
@@ -306,7 +310,7 @@ public class BaseController {
             ApiType apiType = ApiType.valueOf(apiTypeTitle);
             apiCatalog4 = ApiFactory.getApiCatalog4(
                     apiType,
-                    envType == EnvType.TEST ? EnvType.TEST : EnvType.PROD,
+                    envType,
                     number,
                     token
             );
@@ -441,7 +445,7 @@ public class BaseController {
                 getScreenSize();
                 page.setViewportSize(width, height);
 
-                page.navigate(Constants.JAEGER_URL + trace);
+                page.navigate(Constants.JAEGER_URL_TEST + trace);
             }
         });
 
@@ -459,7 +463,7 @@ public class BaseController {
                 getScreenSize();
                 page.setViewportSize(width, height);
 
-                page.navigate(Constants.JAEGER_URL + trace);
+                page.navigate(Constants.JAEGER_URL_TEST + trace);
             }
 
         });
@@ -642,12 +646,12 @@ public class BaseController {
             Browser browser = playwright
                     .chromium()
                     .launch(new BrowserType.LaunchOptions()
-                    .setHeadless(true));
+                    .setHeadless(false));
             Page page = browser.newPage();
 
             for (int i = 0; i < traceIdList.size(); i++) {
                 try {
-                    page.navigate(Constants.JAEGER_URL + traceIdList.get(i));
+                    page.navigate(Constants.JAEGER_URL_TEST + traceIdList.get(i));
                 } catch (PlaywrightException pe) {
                     resultLabel.setText("Try to turn on the vpn");
                     playwright.close();

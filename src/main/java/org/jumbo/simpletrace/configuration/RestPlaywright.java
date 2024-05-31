@@ -7,7 +7,6 @@ import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
 
 import org.jumbo.simpletrace.configuration.api.ApiCatalog4;
-import org.jumbo.simpletrace.configuration.api.EnvType;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
 import org.jumbo.simpletrace.constants.Constants;
 
@@ -57,12 +56,12 @@ public class RestPlaywright {
             }
         }
         if (response != null) {
-            if (endpoint.getEnvType() == EnvType.TEST && !endpoint.getUrl().contains("/bff/")) {
+            if (response.headers().containsKey(Constants.UBER_TRACE_ID.toLowerCase())) {
                 traceId = response.headers().get(Constants.UBER_TRACE_ID.toLowerCase());
+                traceId = traceId.split(":")[0];
             } else {
                 traceId = response.headers().get(Constants.X_TRACE_ID.toLowerCase());
             }
-            traceId = traceId.split(":")[0];
             if (traceId != null) {
                 return traceId;
             }

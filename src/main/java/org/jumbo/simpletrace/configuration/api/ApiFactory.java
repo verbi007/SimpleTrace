@@ -7,6 +7,8 @@ public class ApiFactory {
             case FALSETEASER -> new Falseteaser(envType, number, token);
             case SET -> new Set(envType, number, token);
             case PRODUCT -> new Product(envType, number, token);
+            case TEASERS -> new Teasers(envType, number, token);
+            case SEARCH -> new Search(envType, number, token);
             case PRODUCT_PROPERTIES -> new ProductProperties(envType, number);
             case SHOPPING_LIST -> new ShoppingList(envType, number, token);
             case TREE_AVAILABLE -> new TreeAvailable(envType, number, token);

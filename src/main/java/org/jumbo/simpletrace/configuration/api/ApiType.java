@@ -8,7 +8,10 @@ public enum ApiType {
     PRODUCT_PROPERTIES("ProductProperties"),
     SHOPPING_LIST("ShoppingList"),
     TREE_AVAILABLE("TreeAvailable"),
-    BFF_GET_SCREEN_WIDGETS("BFFGetScreenWidgets");
+    BFF_GET_SCREEN_WIDGETS("BFFGetScreenWidgets"),
+    SEARCH("Search"),
+    TEASERS("Teasers");
+
 
 
     private String title;

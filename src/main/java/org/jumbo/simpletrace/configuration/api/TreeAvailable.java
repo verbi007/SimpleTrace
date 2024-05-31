@@ -24,7 +24,7 @@ public class TreeAvailable extends ApiCatalog4 {
 
         endpoint.setParams("falseteaser_group_id", falseteaserGroupId);
 
-        String url = envType == EnvType.TEST ? Constants.BASE_TEST_URL : Constants.BASE_PROD_URL;
+        String url = envType.getUrl();
         url += Constants.TREE_AVAILABLE;
         endpoint.setUrl(url);
 

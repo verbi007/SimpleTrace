@@ -6,11 +6,13 @@ public interface Constants {
     String BASE_PREPROD_URL = "http://10.1.240.80:8081/api/catalog4";
     String BASE_TEST_URL_NOCATALOG = "https://test.vkusvill.ru/api";
     String BASE_PROD_URL_NOCATALOG = "https://mobile.vkusvill.ru/api";
-    String JAEGER_URL = "http://10.0.15.35:16686/trace/";
+    String JAEGER_URL_TEST = "http://10.0.15.41:16686/trace/";
     String FALSHTEASER = "/falseteaser/group";
     String CATEGORY = "/category";
     String SET = "/set";
     String PRODUCT = "/product";
+    String SEARCH = "/search";
+    String TEASERS = "/teasers";
     String PRODUCT_PROPERTIES = "/integrations/product_properties";
     String SHOPPING_LIST = "/shopping_list/product";
     String TREE_AVAILABLE = "/falseteaser/tree/available";
@@ -23,7 +25,7 @@ public interface Constants {
     String TOKEN_4 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjYXJkIjoiRjMyNDY4MyIsInZlcnNpb24iOjJ9.Wy_9YSiMEybVgAdLrA0IoFVw54a4g_nSWIDYaOon8rjyLPzkyJKUdZuHH3PSaA2xlY1aJfXzirpsFG2lala6h-8jsXQopBwwhF7M1hheZwskf6bcdNsYjXm760UBKC-Ot2yxzQfAO1fYMX5DZlogHvNjPDvK3kToDvOJFSVkBqk";
     String TOKEN_5 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjYXJkIjoiRjMyNDgxOSIsInZlcnNpb24iOjJ9.LbTs_lp8UKoV2L0IeFjlFZfQ6Icy4KYMOO0Bg5iZVT75zyx_iL-wyWkMyANvtLIyRQMpy_5hpNvP41xyUz_CIWWe1YZ4XJ4AYlkkynfV70AZYN6e4qdSGXCXboGiO5kJjQV04SfLWoc8TS8UyRXlLvHv5UrtZVXDQuaLqq8KaRA";
     String TOKEN_INT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcmVlbi1UZWFtLVZrdXN2aWxsIiwiaWF0IjoxNzA2MjYxMzEwLCJleHAiOjE4OTU1NjM3MTAsImF1ZCI6Imh0dHBzOi8vdmt1c3ZpbGwucnUvIiwic3ViIjoiSW50ZWdyYXRpb24iLCJHaXZlbk5hbWUiOiJHbyBGYXRoZXIiLCJTdXJuYW1lIjoiU3VnZ2FyRGFkZHkiLCJSb2xlIjpbIkdvICIsIlByb2plY3QgQWRtaW5pc3RyYXRvciJdfQ.VdBd8T2zAfGxXuaO6zB7lSA68fhQnc_KBMsTG0XOSG8";
-            String CATEGORY_ID= "50361";
+    String CATEGORY_ID= "50361";
     String SET_ID = "10388";
     String PRODUCT_ID = "731";
     String PRODUCT_STR_ID = "24774, 85993, 42133, 43468, 76986, 615, 46, 16055, 1744, 31137";
@@ -44,5 +46,6 @@ public interface Constants {
     Integer REPEATS = 20;
     String DARK = "Dark";
     String LIGHT = "Light";
+    String SEARCH_QUERY = "Бананы";
 
 }

@@ -27,7 +27,7 @@ public class Set extends ApiCatalog4 {
         endpoint.setParams("all_products", allProducts);
         endpoint.setParams("limit", limit);
 
-        String url = envType == EnvType.TEST ? Constants.BASE_TEST_URL : Constants.BASE_PROD_URL;
+        String url = envType.getUrl();
         url += Constants.SET;
         endpoint.setUrl(url);
 
