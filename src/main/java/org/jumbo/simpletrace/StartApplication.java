@@ -11,10 +11,10 @@ import java.io.IOException;
 public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("simpleJaegerTrace.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 740, 469);
         stage.getIcons().add(new Image(StartApplication.class.getResource("/img/Background.png").toString()));
+
 
         stage.setTitle("SJT");
         stage.setScene(scene);

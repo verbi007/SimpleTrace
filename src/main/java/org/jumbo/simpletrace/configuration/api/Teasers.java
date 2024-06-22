@@ -4,12 +4,18 @@ import org.jumbo.simpletrace.configuration.Endpoint;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
 import org.jumbo.simpletrace.constants.Constants;
 
-public class ShoppingList extends ApiCatalog4 {
-    public ShoppingList(EnvType env, String number, String token ) {
-        endpoint = getEndpoint(env, number, token, Constants.SHOPPING_LIST_ID, Constants.SHOP_ID);
+public class Teasers extends ApiCatalog4{
+    public Teasers(EnvType envType, String number, String token) {
+
+        endpoint = getEndpoint(envType, number, token, Constants.PRODUCT_ID);
     }
 
-    public Endpoint getEndpoint(EnvType envType, String number, String token, String listId, String shopId) {
+    public Teasers(Endpoint endpoint) {
+        this.endpoint = endpoint;
+    }
+
+
+    public Endpoint getEndpoint(EnvType envType, String number, String token, String productId) {
         endpoint = new Endpoint();
         endpoint.setApiMethod(ApiMethod.GET);
         endpoint.setEnvType(envType);
@@ -18,17 +24,16 @@ public class ShoppingList extends ApiCatalog4 {
             endpoint.setHeaders("x-vkusvill-token", token);
             endpoint.setParams("number", number);
         } else {
-            endpoint.setHeaders("x-vkusvill-token", Constants.TOKEN_5);
-            endpoint.setParams("number", Constants.NUMBER_5);
+            endpoint.setHeaders("x-vkusvill-token", Constants.TOKEN_4);
+            endpoint.setParams("number", Constants.NUMBER_4);
         }
 
-        endpoint.setParams("list_id", listId);
-//        endpoint.getParams().put("shop_id", shopId);
-
+        endpoint.setParams("product_id", productId);
 
         String url = envType.getUrl();
-        url += Constants.SHOPPING_LIST;
+        url += Constants.TEASERS;
         endpoint.setUrl(url);
+
 
         return endpoint;
     }

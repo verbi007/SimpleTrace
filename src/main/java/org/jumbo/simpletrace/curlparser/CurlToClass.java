@@ -1,7 +1,9 @@
 package org.jumbo.simpletrace.curlparser;
 
 import org.jumbo.simpletrace.configuration.Endpoint;
+import org.jumbo.simpletrace.configuration.api.EnvType;
 import org.jumbo.simpletrace.configuration.api.curl.ApiMethod;
+import org.jumbo.simpletrace.constants.Constants;
 import org.jumbo.simpletrace.datastructures.CommandType;
 import org.jumbo.simpletrace.splitter.CurlToComponents;
 
@@ -29,6 +31,7 @@ public class CurlToClass {
 
                 ApiMethod apiMethod = ApiMethod.checkApiMethod(componentMap.get(CommandType.REQUEST_TYPE).get(0));
 
+                if (url.contains(Constants.BASE_PREPROD_URL)) endpoint.setEnvType(EnvType.PREPROD);
 
                 headers.putAll(SeparationOfComponents.getHeaders(componentMap));
                 params.putAll(SeparationOfComponents.getParams(componentMap));

@@ -1,15 +1,8 @@
-/*:root {*/
-/*    --main-bg-color-lth: rgba(85, 92, 138, 0.28);*/
-/*    --main-bg-color-drk: rgba(62, 72, 133, 0.28);*/
-/*    --main-button-color: #F7CAD9;*/
-/*}*/
-
 .menu_title {
     /*-fx-font-family: "Unispace";*/
     -fx-font-weight: 700;
     -fx-font-size: 24px;
     -fx-text-fill: rgb(241, 156, 0);
-
 }
 
 .main_text {
@@ -44,7 +37,7 @@ link_field:hover {
     -fx-background-color: rgb(241, 156, 0);
 }
 
-link:pressed {
+link_field:pressed {
     -fx-background-color: rgba(255, 118, 0, 0.92);
 }
 
@@ -73,20 +66,20 @@ link:pressed {
 
 .result_text {
     /*-fx-font-family: "Unispace";*/
-    -fx-font-weight: bold;
+    -fx-font-weight: 900;
     -fx-font-size: 20px;
     -fx-text-alignment: center;
 }
 
 .menu_container {
-    -fx-background-color: rgb(44, 44, 44);
+    -fx-background-color: rgb(159, 159, 159);
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-alignment: center;
 }
 
 .main_container {
-    -fx-background-color: rgb(67, 67, 67);
+    -fx-background-color: rgba(97, 97, 97, 0.28);
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
@@ -106,7 +99,7 @@ link:pressed {
 
 .button_text {
     /*-fx-font-family: "Unispace";*/
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
     -fx-font-size: 12px;
     -fx-text-fill: rgb(255, 255, 255);
     -fx-skin: inherit;
